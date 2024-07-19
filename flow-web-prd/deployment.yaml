@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flow-nextjs-prd
+  labels:
+    app: flow-nextjs-prd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flow-nextjs-prd
+  template:
+    metadata:
+      labels:
+        app: flow-nextjs-prd
+    spec:
+      containers:
+        - name: flow-nextjs-prd
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-nextjs-prd:9f74f80582b06c97d4b5422de13045b29a37a39b
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "prd"
+      imagePullSecrets:
+        - name: artifact-registry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flow-nextjs-prd-service
+spec:
+  selector:
+    app: flow-nextjs-prd
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
