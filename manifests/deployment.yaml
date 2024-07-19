@@ -22,6 +22,8 @@ spec:
           env:
             - name: NODE_ENV
               value: "dev"
+      imagePullSecrets:
+        - name: artifact-registry-secret
 ---
 apiVersion: v1
 kind: Service
