@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flow-nextjs-dev
+  labels:
+    app: flow-nextjs-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flow-nextjs-dev
+  template:
+    metadata:
+      labels:
+        app: flow-nextjs-dev
+    spec:
+      containers:
+        - name: flow-nextjs-dev
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "dev"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flow-nextjs-dev-service
+spec:
+  selector:
+    app: flow-nextjs-dev
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
