@@ -16,109 +16,98 @@ spec:
       values: |
         loki:
           enabled: true
-          persistence:
-            type: pvc
-            enabled: true
-            existingClaim: loki
-          securityContext:
-            runAsGroup: 10001
-            runAsUser: 10001
+          isDefault: true
+          url: http://{{(include "loki.serviceName" .)}}:{{ .Values.loki.service.port }}
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http-metrics
+            initialDelaySeconds: 45
+          livenessProbe:
+            httpGet:
+              path: /ready
+              port: http-metrics
+            initialDelaySeconds: 45
+          datasource:
+            jsonData: "{}"
+            uid: ""
+
 
         promtail:
           enabled: true
+          config:
+            logLevel: info
+            serverPort: 3101
+            clients:
+              - url: http://{{ .Release.Name }}:3100/loki/api/v1/push
 
-        fluent-bit:
+        fluent-bit: 
           enabled: false
 
         grafana:
-          enabled: true
+          enabled: false
           sidecar:
-            dashboards:
-              enabled: true
-              label: grafana_dashboard
-              folder: /tmp/dashboards
-              provider:
-                name: sidecarProvider
-                orgid: 1
-                folder: Provisioned
-                type: file
             datasources:
-              enabled: false
+              label: ""
+              labelValue: ""
+              enabled: true
+              maxLines: 1000
           image:
-            tag: 10.0.2
-          persistence:
-            type: pvc
-            enabled: true
-            existingClaim: grafana
-          securityContext:
-            runAsUser: 472
-            runAsGroup: 472
-          initChownData:
-            enabled: false
+            tag: 10.3.3
 
         prometheus:
-          enabled: true
-          configmapReload:
-            prometheus:
-              enabled: false
-            alertmanager:
-              enabled: false
-          extraScrapeConfigs: |
-            - job_name: host_sniper
-              static_configs:
-                - targets:
-                  - 192.168.1.51:9100
-            - job_name: host_proxy1
-              static_configs:
-                - targets:
-                  - 192.168.1.80:9100
-            - job_name: host_proxy2
-              static_configs:
-                - targets:
-                  - 192.168.1.82:9100
-          server:
-            persistentVolume:
-              enabled: true
-              existingClaim: prometheus-server
-              accessModes:
-                - ReadWriteOnce
-            resources:
-              limits:
-                cpu: 2
-                memory: 2Gi
-              requests:
-                cpu: 500m
-                memory: 1Gi
-          alertmanager:
-            persistentVolume:
-              enabled: true
-              existingClaim: prometheus-alertmanager
-              accessModes:
-                - ReadWriteOnce
-            resources:
-              limits:
-                cpu: 100m
-                memory: 100Mi
-              requests:
-                cpu: 50m
-                memory: 50Mi
-          nodeExporter:
-            enabled: true
-            tolerations:
-              - key: node-role.kubernetes.io/master
-                effect: NoSchedule
-              - key: node-role.kubernetes.io/control-plane
-                effect: NoSchedule
-            resources:
-              limits:
-                cpu: 200m
-                memory: 50Mi
-              requests:
-                cpu: 100m
-                memory: 30Mi
+          enabled: false
+          isDefault: false
+          url: http://{{ include "prometheus.fullname" .}}:{{ .Values.prometheus.server.service.servicePort }}{{ .Values.prometheus.server.prefixURL }}
+          datasource:
+            jsonData: "{}"
 
         filebeat:
           enabled: false
+          filebeatConfig:
+            filebeat.yml: |
+              # logging.level: debug
+              filebeat.inputs:
+              - type: container
+                paths:
+                  - /var/log/containers/*.log
+                processors:
+                - add_kubernetes_metadata:
+                    host: ${NODE_NAME}
+                    matchers:
+                    - logs_path:
+                        logs_path: "/var/log/containers/"
+              output.logstash:
+                hosts: ["logstash-loki:5044"]
 
         logstash:
           enabled: false
+          image: grafana/logstash-output-loki
+          imageTag: 1.0.1
+          filters:
+            main: |-
+              filter {
+                if [kubernetes] {
+                  mutate {
+                    add_field => {
+                      "container_name" => "%{[kubernetes][container][name]}"
+                      "namespace" => "%{[kubernetes][namespace]}"
+                      "pod" => "%{[kubernetes][pod][name]}"
+                    }
+                    replace => { "host" => "%{[kubernetes][node][name]}"}
+                  }
+                }
+                mutate {
+                  remove_field => ["tags"]
+                }
+              }
+          outputs:
+            main: |-
+              output {
+                loki {
+                  url => "http://loki:3100/loki/api/v1/push"
+                  #username => "test"
+                  #password => "test"
+                }
+                # stdout { codec => rubydebug }
+              }
