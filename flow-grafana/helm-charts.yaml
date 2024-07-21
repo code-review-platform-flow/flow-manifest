@@ -103,8 +103,3 @@ spec:
           alertmanager:
             persistentVolume:
               enabled: false
-
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
