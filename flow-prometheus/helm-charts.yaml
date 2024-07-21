@@ -14,45 +14,11 @@ spec:
     targetRevision: 15.7.1
     helm:
       values: |
-        alertmanager:
+        prometheus:
           enabled: true
-          persistentVolume:
-            enabled: false
-          resources:
-            limits:
-              cpu: 100m
-              memory: 128Mi
-            requests:
-              cpu: 50m
-              memory: 64Mi
-        server:
-          persistentVolume:
-            enabled: false
+          alertmanager:
+            persistentVolume:
+              enabled: false
           server:
-            resources:
-              limits:
-                cpu: 200m
-                memory: 256Mi
-              requests:
-                cpu: 100m
-                memory: 128Mi
-        pushgateway:
-          enabled: true
-          persistentVolume:
-            enabled: false
-          resources:
-            limits:
-              cpu: 100m
-              memory: 128Mi
-            requests:
-              cpu: 50m
-              memory: 64Mi
-        nodeExporter:
-          enabled: true
-          resources:
-            limits:
-              cpu: 50m
-              memory: 64Mi
-            requests:
-              cpu: 25m
-              memory: 32Mi
+            persistentVolume:
+              enabled: false
