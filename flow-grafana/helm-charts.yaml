@@ -63,7 +63,31 @@ spec:
 
         prometheus:
           enabled: true
-          isDefault: false
-          url: http://{{ include "prometheus.fullname" .}}:{{ .Values.prometheus.server.service.servicePort }}{{ .Values.prometheus.server.prefixURL }}
-          datasource:
-            jsonData: "{}"
+          alertmanager:
+            enabled: true
+            persistentVolume:
+              enabled: false
+          server:
+            enabled: true
+            persistentVolume:
+              enabled: false
+            resources:
+              limits:
+                cpu: 1
+                memory: 1Gi
+              requests:
+                cpu: 500m
+                memory: 512Mi
+          pushgateway:
+            enabled: true
+            persistentVolume:
+              enabled: false
+          nodeExporter:
+            enabled: true
+            resources:
+              limits:
+                cpu: 100m
+                memory: 128Mi
+              requests:
+                cpu: 50m
+                memory: 64Mi
