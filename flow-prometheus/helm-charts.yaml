@@ -1,11 +1,43 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
+metadata:
+  name: prometheus
+  namespace: argocd
 spec:
-  sources:
-    - repoURL: "https://prometheus-community.github.io/helm-charts"
-      chart: prometheus
-      targetRevision: 15.7.1
-      destination:
-        namespace: monitoring
-        server: https://kubernetes.default.svc
-      project: default
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: prometheus
+    targetRevision: 15.7.1
+    helm:
+      values: |
+        alertmanager:
+          enabled: true
+          persistentVolume:
+            enabled: false
+        server:
+          persistentVolume:
+            enabled: false
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 500m
+              memory: 512Mi
+        pushgateway:
+          enabled: true
+          persistentVolume:
+            enabled: false
+        nodeExporter:
+          enabled: true
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
