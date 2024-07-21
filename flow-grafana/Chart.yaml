@@ -1,76 +1,18 @@
-loki:
-  enabled: true
-  image:
-    tag: "latest"
-  persistence:
-    enabled: true
-    storageClassName: standard
-    size: 5Gi
-  readinessProbe:
-    httpGet:
-      path: /ready
-      port: http-metrics
-    initialDelaySeconds: 45
-  livenessProbe:
-    httpGet:
-      path: /ready
-      port: http-metrics
-    initialDelaySeconds: 45
-
-promtail:
-  enabled: true
-  image:
-    tag: "latest"
-  config:
-    clients:
-      - url: http://loki.monitoring:3100/loki/api/v1/push
-    positions:
-      filename: /run/promtail/positions.yaml
-    scrape_configs:
-      - job_name: kubernetes-pods
-        kubernetes_sd_configs:
-          - role: pod
-        relabel_configs:
-          - source_labels: [__meta_kubernetes_pod_label_name]
-            target_label: __service__
-          - source_labels: [__meta_kubernetes_namespace]
-            target_label: namespace
-          - source_labels: [__meta_kubernetes_pod_name]
-            target_label: pod_name
-          - source_labels: [__meta_kubernetes_pod_container_name]
-            target_label: container_name
-          - action: replace
-            source_labels: [__meta_kubernetes_pod_annotation_promtail_path]
-            target_label: __path__
-      - job_name: flow-nextjs-dev
-        static_configs:
-          - targets: ["localhost"]
-            labels:
-              job: flow-nextjs-dev
-              __path__: /var/log/flow-nextjs/*.log
-
-grafana:
-  enabled: true
-  image:
-    tag: "latest"
-  service:
-    type: LoadBalancer
-  adminPassword: "flow@grafana"
-  datasources:
-    datasources.yaml:
-      apiVersion: 1
-      datasources:
-        - name: Loki
-          type: loki
-          url: http://loki.monitoring:3100
-          access: proxy
-          isDefault: true
-
-prometheus:
-  enabled: true
-  alertmanager:
-    persistentVolume:
-      enabled: false
-  server:
-    persistentVolume:
-      enabled: false
+apiVersion: v2
+name: loki-stack
+description: A Helm chart for deploying Loki stack with Promtail, Grafana, and Prometheus
+type: application
+version: 0.1.0
+appVersion: "1.0"
+dependencies:
+  - name: loki
+    version: 3.1.0
+    repository: https://grafana.github.io/helm-charts
+  - name: promtail
+    repository: https://grafana.github.io/helm-charts
+  - name: grafana
+    version: 11.1.0
+    repository: https://grafana.github.io/helm-charts
+  - name: prometheus
+    version: 25.24.1
+    repository: https://prometheus-community.github.io/helm-charts
