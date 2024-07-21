@@ -22,8 +22,15 @@ spec:
           env:
             - name: NODE_ENV
               value: "dev"
+          volumeMounts:
+            - name: log-volume
+              mountPath: /var/log/flow-nextjs
+      volumes:
+        - name: log-volume
+          emptyDir: {}
       imagePullSecrets:
         - name: artifact-registry-secret
+
 ---
 apiVersion: v1
 kind: Service
