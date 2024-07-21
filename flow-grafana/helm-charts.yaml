@@ -62,7 +62,7 @@ spec:
                   isDefault: true
 
         prometheus:
-          enabled: true
+          enabled: false
           alertmanager:
             enabled: true
             persistentVolume:
