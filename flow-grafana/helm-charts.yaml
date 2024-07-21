@@ -1,0 +1,97 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki-stack-charts
+  namespace: argocd
+spec:
+  destination:
+    namespace: loki
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: loki-stack
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 2.9.10
+    helm:
+      values: |
+        loki:
+        enabled: true
+        image:
+          tag: "latest"
+        persistence:
+          enabled: true
+          storageClassName: standard
+          size: 5Gi
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: http-metrics
+          initialDelaySeconds: 45
+        livenessProbe:
+          httpGet:
+            path: /ready
+            port: http-metrics
+          initialDelaySeconds: 45
+
+      promtail:
+        enabled: true
+        image:
+          tag: "latest"
+        config:
+          clients:
+            - url: http://loki.monitoring:3100/loki/api/v1/push
+          positions:
+            filename: /run/promtail/positions.yaml
+          scrape_configs:
+            - job_name: kubernetes-pods
+              kubernetes_sd_configs:
+                - role: pod
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_pod_label_name]
+                  target_label: __service__
+                - source_labels: [__meta_kubernetes_namespace]
+                  target_label: namespace
+                - source_labels: [__meta_kubernetes_pod_name]
+                  target_label: pod_name
+                - source_labels: [__meta_kubernetes_pod_container_name]
+                  target_label: container_name
+                - action: replace
+                  source_labels:
+                    [__meta_kubernetes_pod_annotation_promtail_path]
+                  target_label: __path__
+            - job_name: flow-nextjs-dev
+              static_configs:
+                - targets: ["localhost"]
+                  labels:
+                    job: flow-nextjs-dev
+                    __path__: /var/log/flow-nextjs/*.log
+
+      grafana:
+        enabled: true
+        image:
+          tag: "latest"
+        service:
+          type: LoadBalancer
+        adminPassword: "flow@grafana"
+        datasources:
+          datasources.yaml:
+            apiVersion: 1
+            datasources:
+              - name: Loki
+                type: loki
+                url: http://loki.monitoring:3100
+                access: proxy
+                isDefault: true
+
+      prometheus:
+        enabled: true
+        alertmanager:
+          persistentVolume:
+            enabled: false
+        server:
+          persistentVolume:
+            enabled: false
+
+  syncPolicy:
+    automated:
+      prune: true
