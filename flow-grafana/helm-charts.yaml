@@ -76,12 +76,12 @@ spec:
           enabled: true
           server:
             resources:
-              requests:
-                memory: "1Gi"
-                cpu: "500m"
-              limits:
-                memory: "2Gi"
-                cpu: "1"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+            requests:
+              cpu: "500m"
+              memory: "500Mi"
             readinessProbe:
               httpGet:
                 path: /-/ready
