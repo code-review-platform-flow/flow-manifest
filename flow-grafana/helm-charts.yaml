@@ -45,15 +45,21 @@ spec:
           enabled: false
 
         grafana:
-          enabled: false
-          sidecar:
-            datasources:
-              label: ""
-              labelValue: ""
-              enabled: true
-              maxLines: 1000
+          enabled: true
           image:
-            tag: 10.3.3
+            tag: "latest"
+          service:
+            type: LoadBalancer
+          adminPassword: "flow@grafana"
+          datasources:
+            datasources.yaml:
+              apiVersion: 1
+              datasources:
+                - name: Loki
+                  type: loki
+                  url: http://loki.monitoring:3100
+                  access: proxy
+                  isDefault: true
 
         prometheus:
           enabled: false
