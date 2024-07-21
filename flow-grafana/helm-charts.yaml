@@ -22,16 +22,6 @@ spec:
           enabled: true
           storageClassName: standard
           size: 5Gi
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: http-metrics
-          initialDelaySeconds: 45
-        livenessProbe:
-          httpGet:
-            path: /ready
-            port: http-metrics
-          initialDelaySeconds: 45
 
         promtail:
           enabled: true
