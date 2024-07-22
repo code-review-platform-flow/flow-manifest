@@ -45,6 +45,29 @@ spec:
           service:
             type: LoadBalancer
           adminPassword: "flow@grafana"
+          datasources:
+            datasources.yaml:
+              apiVersion: 1
+              datasources:
+                - name: Loki
+                  type: loki
+                  url: http://loki.monitoring:3100
+                  access: proxy
+                  isDefault: true
+          securityContext:
+            runAsUser: 472
+            runAsGroup: 472
+            fsGroup: 472
+          initChownData:
+            enabled: true
+          sidecar:
+            datasources:
+              enabled: true
+              label: grafana_datasource
+              defaultFolderName: ""
+              folderAnnotation: ""
+              searchPattern: "datasources.yaml"
+              reloadURL: "http://10.48.4.24:3000/api/admin/provisioning/datasources/reload"
 
         prometheus:
           enabled: true
