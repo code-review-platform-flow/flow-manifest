@@ -39,7 +39,7 @@ spec:
             tag: "latest"
           config:
             clients:
-              - url: http://loki.monitoring:3100/loki/api/v1/push
+              - url: http://loki-stack-charts:3100/loki/api/v1/push
             positions:
               filename: /run/promtail/positions.yaml
             scrape_configs:
