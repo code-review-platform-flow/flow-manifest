@@ -13,12 +13,4 @@ spec:
     chart: prometheus
     targetRevision: 15.7.1
     helm:
-      values: |
-        prometheus:
-          enabled: true
-          alertmanager:
-            persistentVolume:
-              enabled: false
-          server:
-            persistentVolume:
-              enabled: false
+      values:
