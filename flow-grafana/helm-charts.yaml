@@ -54,6 +54,10 @@ spec:
                   url: http://loki.monitoring:3100
                   access: proxy
                   isDefault: true
+          securityContext:
+            runAsUser: 472
+            runAsGroup: 472
+            fsGroup: 472
 
         prometheus:
           enabled: true
