@@ -72,15 +72,6 @@ spec:
           service:
             type: LoadBalancer
           adminPassword: "flow@grafana"
-          datasources:
-            datasources.yaml:
-              apiVersion: 1
-              datasources:
-                - name: Loki
-                  type: loki
-                  url: http://loki.monitoring:3100
-                  access: proxy
-                  isDefault: true
 
         prometheus:
           enabled: true
