@@ -16,6 +16,12 @@ spec:
       values: |
         loki:
           enabled: true
+          image:
+            tag: "latest"
+          persistence:
+            enabled: true
+            storageClassName: standard
+            size: 5Gi
           readinessProbe:
             httpGet:
               path: /ready
@@ -29,14 +35,35 @@ spec:
 
         promtail:
           enabled: true
+          image:
+            tag: "latest"
           config:
-            logLevel: info
-            serverPort: 3101
             clients:
               - url: http://loki.monitoring:3100/loki/api/v1/push
-
-        fluent-bit:
-          enabled: false
+            positions:
+              filename: /run/promtail/positions.yaml
+            scrape_configs:
+              - job_name: kubernetes-pods
+                kubernetes_sd_configs:
+                  - role: pod
+                relabel_configs:
+                  - source_labels: [__meta_kubernetes_pod_label_name]
+                    target_label: __service__
+                  - source_labels: [__meta_kubernetes_namespace]
+                    target_label: namespace
+                  - source_labels: [__meta_kubernetes_pod_name]
+                    target_label: pod_name
+                  - source_labels: [__meta_kubernetes_pod_container_name]
+                    target_label: container_name
+                  - action: replace
+                    source_labels: [__meta_kubernetes_pod_annotation_promtail_path]
+                    target_label: __path__
+              - job_name: flow-nextjs-dev
+                static_configs:
+                  - targets: ['localhost']
+                    labels:
+                      job: flow-nextjs-dev
+                      __path__: /var/log/flow-nextjs/*.log
 
         grafana:
           enabled: true
@@ -54,48 +81,12 @@ spec:
                   url: http://loki.monitoring:3100
                   access: proxy
                   isDefault: true
-          securityContext:
-            runAsUser: 472
-            runAsGroup: 472
-            fsGroup: 472
-          initChownData:
-            enabled: true
-          sidecar:
-            datasources:
-              enabled: true
-              label: grafana_datasource
-              defaultFolderName: ""
-              folderAnnotation: ""
-              searchPattern: "datasources.yaml"
-              reloadURL: "http://10.48.4.24:3000/api/admin/provisioning/datasources/reload"
 
         prometheus:
           enabled: true
           alertmanager:
-            enabled: true
             persistentVolume:
               enabled: false
           server:
-            enabled: true
             persistentVolume:
               enabled: false
-            resources:
-              limits:
-                cpu: 1
-                memory: 1Gi
-              requests:
-                cpu: 500m
-                memory: 512Mi
-          pushgateway:
-            enabled: true
-            persistentVolume:
-              enabled: false
-          nodeExporter:
-            enabled: true
-            resources:
-              limits:
-                cpu: 100m
-                memory: 128Mi
-              requests:
-                cpu: 50m
-                memory: 64Mi
