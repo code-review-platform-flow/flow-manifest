@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flow-main-dev
+  name: flow-main-prd
   namespace: flow
   labels:
-    app: flow-main-dev
+    app: flow-main-prd
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flow-main-dev
+      app: flow-main-prd
   template:
     metadata:
       labels:
-        app: flow-main-dev
+        app: flow-main-prd
     spec:
       containers:
-        - name: flow-main-dev
-          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-main-dev:latest
+        - name: flow-main-prd
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-prd/flow-main-prd:e117238fdeca0263f5c94ba71c16b81b6d6a5932
           ports:
             - containerPort: 8080
           env:
@@ -36,11 +36,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: flow-main-dev-service
+  name: flow-main-prd-service
   namespace: flow
 spec:
   selector:
-    app: flow-main-dev
+    app: flow-main-prd
   ports:
     - protocol: TCP
       port: 80
