@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flow-main-dev
+  namespace: flow
+  labels:
+    app: flow-main-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flow-main-dev
+  template:
+    metadata:
+      labels:
+        app: flow-main-dev
+    spec:
+      containers:
+        - name: flow-main-dev
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-main-dev:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PROFILE
+              value: "dev"
+          volumeMounts:
+            - name: log-volume
+              mountPath: /var/log/flow-nextjs
+      volumes:
+        - name: log-volume
+          emptyDir: {}
+      imagePullSecrets:
+        - name: artifact-registry-secret
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flow-main-dev-service
+  namespace: flow
+spec:
+  selector:
+    app: flow-main-dev
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
