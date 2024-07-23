@@ -58,12 +58,6 @@ spec:
                   - action: replace
                     source_labels: [__meta_kubernetes_pod_annotation_promtail_path]
                     target_label: __path__
-              - job_name: flow-nextjs-dev
-                static_configs:
-                  - targets: ['localhost']
-                    labels:
-                      job: flow-nextjs-dev
-                      __path__: /var/log/flow-nextjs/*.log
 
         grafana:
           enabled: true
