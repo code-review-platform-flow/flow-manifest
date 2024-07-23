@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flow-nextjs-prd
+  namespace: flow
   labels:
     app: flow-nextjs-prd
 spec:
@@ -29,6 +30,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: flow-nextjs-prd-service
+  namespace: flow
 spec:
   selector:
     app: flow-nextjs-prd
