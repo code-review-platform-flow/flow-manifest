@@ -22,7 +22,7 @@ spec:
             - containerPort: 8080
           env:
             - name: PROFILE
-              value: "dev"
+              value: "prd"
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow
