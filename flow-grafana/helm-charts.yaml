@@ -22,16 +22,6 @@ spec:
             enabled: true
             storageClassName: standard
             size: 5Gi
-          readinessProbe:
-            httpGet:
-              path: /ready
-              port: http-metrics
-            initialDelaySeconds: 45
-          livenessProbe:
-            httpGet:
-              path: /ready
-              port: http-metrics
-            initialDelaySeconds: 45
 
         promtail:
           enabled: true
@@ -46,8 +36,6 @@ spec:
               - job_name: kubernetes-pods
                 kubernetes_sd_configs:
                   - role: pod
-                    namespaces:
-                      names: [default]
                 relabel_configs:
                   - source_labels: [__meta_kubernetes_pod_label_name]
                     target_label: __service__
