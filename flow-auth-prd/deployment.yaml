@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flow-auth-prd
+  namespace: flow
+  labels:
+    app: flow-auth-prd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flow-auth-prd
+  template:
+    metadata:
+      labels:
+        app: flow-auth-prd
+    spec:
+      containers:
+        - name: flow-auth-prd
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-prd/flow-auth-prd:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PROFILE
+              value: "prd"
+          volumeMounts:
+            - name: log-volume
+              mountPath: /var/log/flow
+      volumes:
+        - name: log-volume
+          emptyDir: {}
+      imagePullSecrets:
+        - name: artifact-registry-secret
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flow-auth-prd-service
+  namespace: flow
+spec:
+  selector:
+    app: flow-auth-prd
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
