@@ -26,17 +26,17 @@ spec:
             - name: DB_URL
               valueFrom:
                 secretKeyRef:
-                  name: flow-auth-secret
+                  name: flow-auth-dev-secret
                   key: DB_URL
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: flow-auth-secret
+                  name: flow-auth-dev-secret
                   key: DB_USERNAME
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: flow-auth-secret
+                  name: flow-auth-dev-secret
                   key: DB_PASSWORD
           volumeMounts:
             - name: log-volume

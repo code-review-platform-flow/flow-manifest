@@ -23,6 +23,21 @@ spec:
           env:
             - name: PROFILE
               value: "prd"
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: flow-auth-prd-secret
+                  key: DB_URL
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: flow-auth-prd-secret
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: flow-auth-prd-secret
+                  key: DB_PASSWORD
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow
