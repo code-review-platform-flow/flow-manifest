@@ -45,4 +45,7 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 3000
+    - protocol: TCP
+      port: 6006
+      targetPort: 6006
   type: LoadBalancer
