@@ -20,7 +20,6 @@ spec:
           image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-nextjs-dev:14be7e20c1b5062b2eb7129f40436b25137a5c2d
           ports:
             - containerPort: 3000
-            - containerPort: 6006
           env:
             - name: NODE_ENV
               value: "dev"
@@ -30,8 +29,6 @@ spec:
       volumes:
         - name: log-volume
           emptyDir: {}
-      imagePullSecrets:
-        - name: artifact-registry-secret
 
 ---
 apiVersion: v1
@@ -47,8 +44,4 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 3000
-    - name: storybook
-      protocol: TCP
-      port: 6006
-      targetPort: 6006
   type: LoadBalancer
