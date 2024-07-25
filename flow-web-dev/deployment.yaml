@@ -22,7 +22,7 @@ spec:
             - containerPort: 3000
           env:
             - name: NODE_ENV
-              value: "dev"
+              value: "development"
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow-nextjs

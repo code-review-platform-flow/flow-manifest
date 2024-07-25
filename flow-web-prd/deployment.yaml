@@ -22,7 +22,7 @@ spec:
             - containerPort: 3000
           env:
             - name: NODE_ENV
-              value: "prd"
+              value: "production"
       imagePullSecrets:
         - name: artifact-registry-secret
 ---
