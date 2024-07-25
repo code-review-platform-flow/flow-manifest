@@ -43,10 +43,12 @@ spec:
   selector:
     app: flow-nextjs-dev
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 80
       targetPort: 3000
-    - protocol: TCP
+    - name: storybook
+      protocol: TCP
       port: 6006
       targetPort: 6006
   type: LoadBalancer
