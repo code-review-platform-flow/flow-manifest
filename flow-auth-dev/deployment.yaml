@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flow-auth-dev
-          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-auth-dev:85d2f331b8d0098878c99a15bbdb84ef17377eff
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-auth-dev:48e7990a506369f2e33b7af08d643c2fac675435
           ports:
             - containerPort: 8080
           env:
