@@ -21,7 +21,7 @@ spec:
           ports:
             - containerPort: 3000
           env:
-            - name: NODE_ENV
+            - name: APP_ENV
               value: "development"
           volumeMounts:
             - name: log-volume
