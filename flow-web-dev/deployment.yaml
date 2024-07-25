@@ -20,6 +20,7 @@ spec:
           image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-nextjs-dev:c26ee68db5654a519dc283ef341d45d8180f0ad7
           ports:
             - containerPort: 3000
+            - containerPort: 6006
           env:
             - name: NODE_ENV
               value: "dev"
