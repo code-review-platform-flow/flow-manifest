@@ -23,6 +23,11 @@ spec:
           env:
             - name: PROFILE
               value: "dev"
+            - name: FLOW_AUTH_URI
+              valueFrom:
+                secretKeyRef:
+                  name: flow-main-dev-secret
+                  key: FLOW_AUTH_URI
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow
