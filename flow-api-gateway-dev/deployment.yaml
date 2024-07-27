@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flow-api-gateway-dev
+  namespace: flow
+  labels:
+    app: flow-api-gateway-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flow-api-gateway-dev
+  template:
+    metadata:
+      labels:
+        app: flow-api-gateway-dev
+    spec:
+      containers:
+        - name: flow-api-gateway-dev
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-api-gateway-dev:3f0dcd59098fdd660a9a4319289adc67b83b0f8e
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PROFILE
+              value: "dev"
+            - name: FLOW_AUTH_URI
+              valueFrom:
+                secretKeyRef:
+                  name: flow-api-gateway-dev-secret
+                  key: FLOW_AUTH_URI
+          volumeMounts:
+            - name: log-volume
+              mountPath: /var/log/flow
+      volumes:
+        - name: log-volume
+          emptyDir: {}
+      imagePullSecrets:
+        - name: artifact-registry-secret
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flow-api-gateway-dev-service
+  namespace: flow
+spec:
+  selector:
+    app: flow-api-gateway-dev
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer

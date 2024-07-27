@@ -17,12 +17,27 @@ spec:
     spec:
       containers:
         - name: flow-main-prd
-          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-prd/flow-main-prd:7f02037b8133ea53ee479756a950228b5b8e6c3f
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-prd/flow-main-prd:55e82410504592755b93e28fe411586a56449a89
           ports:
             - containerPort: 8080
           env:
             - name: PROFILE
               value: "prd"
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: flow-main-prd-secret
+                  key: DB_URL
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: flow-main-prd-secret
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: flow-main-prd-secret
+                  key: DB_PASSWORD
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow
