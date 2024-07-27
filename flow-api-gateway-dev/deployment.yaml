@@ -34,8 +34,6 @@ spec:
       volumes:
         - name: log-volume
           emptyDir: {}
-      imagePullSecrets:
-        - name: artifact-registry-secret
 
 ---
 apiVersion: v1
