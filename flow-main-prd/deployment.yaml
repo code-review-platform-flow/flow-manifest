@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flow-main-prd
-          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-prd/flow-main-prd:55e82410504592755b93e28fe411586a56449a89
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-prd/flow-main-prd:f871ecb63d8a5cbaf1b879f6afd2d9119bf9494d
           ports:
             - containerPort: 8080
           env:
