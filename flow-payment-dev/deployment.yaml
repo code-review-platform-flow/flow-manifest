@@ -38,6 +38,11 @@ spec:
                 secretKeyRef:
                   name: flow-payment-dev-secret
                   key: DB_PASSWORD
+            - name: WIDGET_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: flow-payment-dev-secret
+                  key: WIDGET_SECRET_KEY
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow
