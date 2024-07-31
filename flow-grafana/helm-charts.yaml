@@ -22,6 +22,13 @@ spec:
             enabled: true
             storageClassName: standard
             size: 5Gi
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
 
         promtail:
           enabled: true
@@ -70,6 +77,13 @@ spec:
                     labels:
                       job: flow-nextjs-dev
                       __path__: /var/log/flow-nextjs/*.log
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "200m"
 
         grafana:
           enabled: true
@@ -78,6 +92,13 @@ spec:
           service:
             type: LoadBalancer
           adminPassword: "flow@grafana"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "200m"
 
         prometheus:
           enabled: true
@@ -87,3 +108,10 @@ spec:
           server:
             persistentVolume:
               enabled: false
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
