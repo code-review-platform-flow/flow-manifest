@@ -63,6 +63,20 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "200m"
+      tolerations:
+        - key: "instance_type"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: team
+                    operator: In
+                    values:
+                      - devops
       volumes:
         - name: log-volume
           emptyDir: {}
