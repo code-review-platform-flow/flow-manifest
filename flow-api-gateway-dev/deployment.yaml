@@ -23,11 +23,6 @@ spec:
           env:
             - name: PROFILE
               value: "dev"
-            - name: FLOW_MAIN_URI
-              valueFrom:
-                secretKeyRef:
-                  name: flow-api-gateway-dev-secret
-                  key: FLOW_MAIN_URI
             - name: DB_URL
               valueFrom:
                 secretKeyRef:
