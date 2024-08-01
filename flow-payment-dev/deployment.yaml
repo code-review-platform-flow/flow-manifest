@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flow-payment-dev
-          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-payment-dev:bbcbc62235aed0fcc31426933f8d595fec370a11
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-payment-dev:9efa867a274706e4d8d66ba7492500ed02824ad4
           ports:
             - containerPort: 8080
           env:
