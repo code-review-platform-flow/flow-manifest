@@ -8,6 +8,16 @@ server:
     limits:
       memory: "256Mi"
       cpu: "100m"
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - server
+          topologyKey: "kubernetes.io/hostname"
 
 repoServer:
   resources:
@@ -17,6 +27,16 @@ repoServer:
     limits:
       memory: "256Mi"
       cpu: "100m"
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - repoServer
+          topologyKey: "kubernetes.io/hostname"
 
 applicationController:
   resources:
@@ -26,6 +46,16 @@ applicationController:
     limits:
       memory: "256Mi"
       cpu: "100m"
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - applicationController
+          topologyKey: "kubernetes.io/hostname"
 
 dex:
   resources:
@@ -35,6 +65,16 @@ dex:
     limits:
       memory: "256Mi"
       cpu: "100m"
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - dex
+          topologyKey: "kubernetes.io/hostname"
 
 redis:
   resources:
@@ -44,3 +84,13 @@ redis:
     limits:
       memory: "256Mi"
       cpu: "100m"
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - redis
+          topologyKey: "kubernetes.io/hostname"
