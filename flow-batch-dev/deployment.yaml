@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flow-batch-dev
+  namespace: flow
+  labels:
+    app: flow-batch-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flow-batch-dev
+  template:
+    metadata:
+      labels:
+        app: flow-batch-dev
+    spec:
+      containers:
+        - name: flow-batch-dev
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-batch-dev:fde227fca4d306c01fc189ece2054edfecd52d98
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PROFILE
+              value: "dev"
+          volumeMounts:
+            - name: log-volume
+              mountPath: /var/log/flow-batch
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+      tolerations:
+        - key: "instance_type"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: team
+                    operator: In
+                    values:
+                      - devops
+      volumes:
+        - name: log-volume
+          emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flow-batch-dev-service
+  namespace: flow
+spec:
+  selector:
+    app: flow-batch-dev
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
