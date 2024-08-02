@@ -125,25 +125,11 @@ spec:
               enabled: false
             resources:
               requests:
-                memory: "128Mi"
-                cpu: "100m"
-              limits:
                 memory: "256Mi"
                 cpu: "200m"
-            livenessProbe:
-              httpGet:
-                path: /-/healthy
-                port: 9090
-              initialDelaySeconds: 60
-              periodSeconds: 10
-              timeoutSeconds: 5
-            readinessProbe:
-              httpGet:
-                path: /-/ready
-                port: 9090
-              initialDelaySeconds: 60
-              periodSeconds: 10
-              timeoutSeconds: 5
+              limits:
+                memory: "512Mi"
+                cpu: "400m"
           pushgateway:
             enabled: true
             resources:
