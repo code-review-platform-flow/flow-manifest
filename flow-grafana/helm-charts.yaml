@@ -130,13 +130,6 @@ spec:
               limits:
                 memory: "256Mi"
                 cpu: "200m"
-            livenessProbe:
-              httpGet:
-                path: /-/healthy
-                port: 9090
-              initialDelaySeconds: 60
-              periodSeconds: 10
-              timeoutSeconds: 5
             readinessProbe:
               httpGet:
                 path: /-/ready
