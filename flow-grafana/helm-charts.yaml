@@ -121,6 +121,13 @@ spec:
             persistentVolume:
               enabled: false
           server:
+            readinessProbe:
+              httpGet:
+                path: /-/ready
+                port: 9090
+              initialDelaySeconds: 60
+              periodSeconds: 10
+              timeoutSeconds: 5
             persistentVolume:
               enabled: false
             resources:
@@ -130,13 +137,6 @@ spec:
               limits:
                 memory: "256Mi"
                 cpu: "200m"
-            readinessProbe:
-              httpGet:
-                path: /-/ready
-                port: 9090
-              initialDelaySeconds: 60
-              periodSeconds: 10
-              timeoutSeconds: 5
           pushgateway:
             enabled: true
             resources:
