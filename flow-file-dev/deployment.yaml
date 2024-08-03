@@ -38,8 +38,19 @@ spec:
                 secretKeyRef:
                   name: flow-file-dev-secret
                   key: DB_PASSWORD
+            - name: GCP_PROJECT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: flow-file-dev-secret
+                  key: GCP_PROJECT_ID
+            - name: GCP_STORAGE_BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: flow-file-dev-secret
+                  key: GCP_STORAGE_BUCKET
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/gcp-key.json
+
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow
