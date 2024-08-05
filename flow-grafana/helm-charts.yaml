@@ -108,13 +108,6 @@ spec:
           server:
             persistentVolume:
               enabled: false
-            resources:
-              requests:
-                memory: "256Mi"
-                cpu: "200m"
-              limits:
-                memory: "512Mi"
-                cpu: "400m"
           pushgateway:
             enabled: true
             resources:
