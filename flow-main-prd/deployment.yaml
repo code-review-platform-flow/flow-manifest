@@ -38,21 +38,6 @@ spec:
                 secretKeyRef:
                   name: flow-main-prd-secret
                   key: DB_PASSWORD
-            - name: JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: flow-api-gateway-dev-secret
-                  key: JWT_SECRET
-            - name: ACCESS_EXPIRATION
-              valueFrom:
-                secretKeyRef:
-                  name: flow-api-gateway-dev-secret
-                  key: ACCESS_EXPIRATION
-            - name: REFRESH_EXPIRATION
-              valueFrom:
-                secretKeyRef:
-                  name: flow-api-gateway-dev-secret
-                  key: REFRESH_EXPIRATION
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow
