@@ -114,6 +114,10 @@ spec:
               operator: "Equal"
               value: "spot"
               effect: "NoSchedule"
+          persistence:
+            enabled: true
+            size: 5Gi
+            storageClassName: standard
 
         prometheus:
           enabled: true
