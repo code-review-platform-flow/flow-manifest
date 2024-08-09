@@ -43,6 +43,9 @@ spec:
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow-nextjs
+            - name: env-volume
+              mountPath: /app/.env
+              subPath: .env
           resources:
             requests:
               memory: "128Mi"
@@ -67,6 +70,9 @@ spec:
       volumes:
         - name: log-volume
           emptyDir: {}
+        - name: env-volume
+          secret:
+            secretName: flow-web-dev-secret
 
 ---
 apiVersion: v1
