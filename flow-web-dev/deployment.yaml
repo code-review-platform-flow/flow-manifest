@@ -25,16 +25,16 @@ spec:
               value: "dev"
             - name: APP_ENV
               value: "development"
-            - name: TOSS_CLIENT_KEY
+            - name: NEXT_PUBLIC_TOSS_CLIENT_KEY
               valueFrom:
                 secretKeyRef:
                   name: flow-web-dev-secret
-                  key: TOSS_CLIENT_KEY
-            - name: TOSS_SECRET_KEY
+                  key: NEXT_PUBLIC_TOSS_CLIENT_KEY
+            - name: NEXT_PUBLIC_TOSS_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: flow-web-dev-secret
-                  key: TOSS_SECRET_KEY
+                  key: NEXT_PUBLIC_TOSS_SECRET_KEY
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow-nextjs
