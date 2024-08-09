@@ -23,9 +23,9 @@ spec:
           env:
             - name: APP_ENV
               value: "development"
-            - name : VITE_TOSS_CLIENT_KEY
+            - name : NEXT_PUBLIC_TOSS_CLIENT_KEY
               value : "test_ck_0RnYX2w5327goRzl1J1RVNeyqApQ"
-            - name : VITE_TOSS_SECERET_KEY
+            - name : NEXT_PUBLIC_TOSS_SECERET_KEY
               value : "test_sk_yL0qZ4G1VOdD0aBmoE0kroWb2MQY"
           volumeMounts:
             - name: log-volume
