@@ -23,6 +23,8 @@ spec:
           env:
             - name: APP_ENV
               value: "development"
+            - name: PROFILE
+              value: "dev"
             - name:  NEXT_PUBLIC_TOSS_CLIENT_KEY
                 valueFrom:
                   secretKeyRef:
