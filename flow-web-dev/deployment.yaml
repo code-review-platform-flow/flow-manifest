@@ -21,6 +21,8 @@ spec:
           ports:
             - containerPort: 3000
           env:
+            - name: PROFILE
+              value: "dev"
             - name: APP_ENV
               value: "development"
             - name: NEXT_PUBLIC_TOSS_CLIENT_KEY
