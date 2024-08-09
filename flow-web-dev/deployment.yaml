@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flow-nextjs-dev
-          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-nextjs-dev:d6a4e0ca02f55b33ad4fb8da82f8b692a01e44ca
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-nextjs-dev:14308c46ce2ab64ddaea417feb8e951edc106f4c
           ports:
             - containerPort: 3000
           env:
