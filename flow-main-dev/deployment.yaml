@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flow-main-dev
-          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-main-dev:68d060d08e9dd45e36b0882b32d255b6fe225bcb
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-main-dev:dd2e7c840b611d95c027780c0592fb4a1a7051db
           ports:
             - containerPort: 8080
           env:
