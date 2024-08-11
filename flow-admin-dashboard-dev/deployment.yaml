@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flow-admin-dashboard-dev
-          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-admin-dashboard-dev:6a8c84d7128cd8192de6da48ed63eb15093cfa33
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-admin-dashboard-dev:651dc68bc519643338c27746e84200d53afeb82b
           ports:
             - containerPort: 3000
           env:
