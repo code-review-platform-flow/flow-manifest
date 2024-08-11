@@ -53,6 +53,11 @@ spec:
                 secretKeyRef:
                   name: flow-api-gateway-dev-secret
                   key: REFRESH_EXPIRATION
+            - name: PROFILE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: flow-api-gateway-dev-secret
+                  key: PROFILE_URL
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow
