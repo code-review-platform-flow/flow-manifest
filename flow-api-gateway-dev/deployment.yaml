@@ -68,6 +68,16 @@ spec:
                 secretKeyRef:
                   name: flow-api-gateway-dev-secret
                   key: ADMIN_ROUTE_ADDRESS
+            - name: FLOW_WEB_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  name: flow-api-gateway-dev-secret
+                  key: FLOW_WEB_ADDRESS
+            - name: FLOW_ADMIN_DASHBOARD_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  name: flow-api-gateway-dev-secret
+                  key: FLOW_ADMIN_DASHBOARD_ADDRESS
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow
