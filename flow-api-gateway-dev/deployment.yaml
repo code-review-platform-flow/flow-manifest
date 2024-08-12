@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flow-api-gateway-dev
-          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-api-gateway-dev:be063e91519c52ef37bb368d80b420cfda30ecb6
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-api-gateway-dev:1cdb0c9bffc9e2d3d229593c5b42d8f1610845d8
           ports:
             - containerPort: 8080
           env:
