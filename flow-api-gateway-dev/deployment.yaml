@@ -63,6 +63,11 @@ spec:
                 secretKeyRef:
                   name: flow-api-gateway-dev-secret
                   key: PAYMENT_ROUTE_ADDRESS
+            - name: ADMIN_ROUTE_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  name: flow-api-gateway-dev-secret
+                  key: ADMIN_ROUTE_ADDRESS
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow
