@@ -58,6 +58,11 @@ spec:
                 secretKeyRef:
                   name: flow-main-dev-secret
                   key: PROFILE_URL
+            - name: UNIV_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: flow-main-dev-secret
+                  key: UNIV_API_KEY
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow
