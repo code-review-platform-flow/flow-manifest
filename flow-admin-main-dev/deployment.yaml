@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flow-admin-main-dev
+  namespace: flow
+  labels:
+    app: flow-admin-main-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flow-admin-main-dev
+  template:
+    metadata:
+      labels:
+        app: flow-admin-main-dev
+    spec:
+      containers:
+        - name: flow-admin-main-dev
+          image: asia-northeast3-docker.pkg.dev/code-review-platform-flow/flow-dev/flow-admin-main-dev:cd49b64edb3f6260745df44146ba0693562c07c2
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PROFILE
+              value: "dev"
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: flow-admin-main-dev-secret
+                  key: DB_URL
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: flow-admin-main-dev-secret
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: flow-admin-main-dev-secret
+                  key: DB_PASSWORD
+          volumeMounts:
+            - name: log-volume
+              mountPath: /var/log/flow
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+      tolerations:
+        - key: "instance_type"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: team
+                    operator: In
+                    values:
+                      - devops
+      volumes:
+        - name: log-volume
+          emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flow-admin-main-dev-service
+  namespace: flow
+spec:
+  selector:
+    app: flow-admin-main-dev
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
