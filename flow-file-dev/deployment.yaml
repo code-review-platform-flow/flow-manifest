@@ -57,13 +57,6 @@ spec:
             - name: gcp-key-volume
               mountPath: /var/secrets
               readOnly: true
-          resources:
-            requests:
-              memory: "128Mi"
-              cpu: "100m"
-            limits:
-              memory: "256Mi"
-              cpu: "200m"
       tolerations:
         - key: "instance_type"
           operator: "Equal"
