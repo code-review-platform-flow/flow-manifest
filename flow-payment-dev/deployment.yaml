@@ -46,13 +46,6 @@ spec:
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow
-          resources:
-            requests:
-              memory: "128Mi"
-              cpu: "100m"
-            limits:
-              memory: "256Mi"
-              cpu: "200m"
       tolerations:
         - key: "instance_type"
           operator: "Equal"
