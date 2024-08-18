@@ -34,6 +34,13 @@ spec:
               operator: "Equal"
               value: "spot"
               effect: "NoSchedule"
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: loki
 
         promtail:
           enabled: true
@@ -94,6 +101,13 @@ spec:
               operator: "Equal"
               value: "spot"
               effect: "NoSchedule"
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: promtail
 
         grafana:
           enabled: true
@@ -118,6 +132,13 @@ spec:
             enabled: true
             size: 5Gi
             storageClassName: standard
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: grafana
 
         prometheus:
           enabled: true
@@ -148,3 +169,10 @@ spec:
               operator: "Equal"
               value: "spot"
               effect: "NoSchedule"
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: prometheus

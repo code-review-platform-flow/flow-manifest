@@ -50,7 +50,6 @@ spec:
                   key: GCP_STORAGE_BUCKET
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/gcp-key.json
-
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/flow
@@ -71,6 +70,13 @@ spec:
                     operator: In
                     values:
                       - devops
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: flow
       volumes:
         - name: log-volume
           emptyDir: {}
