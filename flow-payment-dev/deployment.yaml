@@ -5,17 +5,18 @@ metadata:
   namespace: flow
   labels:
     app: flow
-    team: devops
+    service: flow
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: flow-payment-dev
+      service: flow
   template:
     metadata:
       labels:
         app: flow-payment-dev
-        team: devops
+        service: flow
     spec:
       containers:
         - name: flow-payment-dev
@@ -68,7 +69,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app: flow-payment-dev
+              service: flow
       volumes:
         - name: log-volume
           emptyDir: {}

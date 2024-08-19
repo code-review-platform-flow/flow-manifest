@@ -5,17 +5,18 @@ metadata:
   namespace: flow
   labels:
     app: flow
-    team: devops
+    service: flow
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: flow-nextjs-dev
+      service: flow
   template:
     metadata:
       labels:
         app: flow-nextjs-dev
-        team: devops
+        service: flow
     spec:
       containers:
         - name: flow-nextjs-dev
@@ -45,7 +46,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app: flow-main-dev
+              service: flow
       volumes:
         - name: log-volume
           emptyDir: {}
