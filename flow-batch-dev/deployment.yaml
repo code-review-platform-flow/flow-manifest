@@ -52,14 +52,6 @@ spec:
                   values:
                     - flow-batch-dev
             topologyKey: "kubernetes.io/hostname"
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app: flow-batch-dev
-              service: flow
       volumes:
         - name: log-volume
           emptyDir: {}

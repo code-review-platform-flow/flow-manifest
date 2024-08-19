@@ -72,14 +72,6 @@ spec:
                   values:
                     - flow-payment-dev
             topologyKey: "kubernetes.io/hostname"
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app: flow-payment-dev
-              service: flow
       volumes:
         - name: log-volume
           emptyDir: {}
