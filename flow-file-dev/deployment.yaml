@@ -79,6 +79,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
+              app: flow-file-dev
               service: flow
       volumes:
         - name: log-volume
