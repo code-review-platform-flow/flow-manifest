@@ -4,16 +4,16 @@ metadata:
   name: flow-nextjs-dev
   namespace: flow
   labels:
-    app: flow-nextjs-dev
+    app: flow
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flow-nextjs-dev
+      app: flow
   template:
     metadata:
       labels:
-        app: flow-nextjs-dev
+        app: flow
     spec:
       containers:
         - name: flow-nextjs-dev

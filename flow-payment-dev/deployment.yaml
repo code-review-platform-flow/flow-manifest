@@ -4,16 +4,16 @@ metadata:
   name: flow-payment-dev
   namespace: flow
   labels:
-    app: flow-payment-dev
+    app: flow
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flow-payment-dev
+      app: flow
   template:
     metadata:
       labels:
-        app: flow-payment-dev
+        app: flow
     spec:
       containers:
         - name: flow-payment-dev
