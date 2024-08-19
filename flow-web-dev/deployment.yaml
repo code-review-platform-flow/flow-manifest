@@ -4,7 +4,7 @@ metadata:
   name: flow-nextjs-dev
   namespace: flow
   labels:
-    app: flow-nextjs-dev
+    app: flow
 spec:
   replicas: 1
   selector:
@@ -43,7 +43,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app: flow-nextjs-dev
+              app: flow
       volumes:
         - name: log-volume
           emptyDir: {}
