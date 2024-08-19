@@ -1,4 +1,4 @@
-apiVersion: internal.autoscaling.gke.io/v1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: flow-hpa
@@ -16,7 +16,7 @@ spec:
         name: memory
         target:
           type: Utilization
-          targetAverageValue: 95
+          averageUtilization: 80
   behavior:
     scaleUp:
       stabilizationWindowSeconds: 0
