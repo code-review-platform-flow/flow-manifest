@@ -2,12 +2,12 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: flow-hpa
-  namespace: default
+  namespace: flow
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: flow
+    name: flow-main-dev
   minReplicas: 1
   maxReplicas: 10
   metrics:
