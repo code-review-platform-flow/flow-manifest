@@ -4,7 +4,7 @@ metadata:
   name: flow-batch-dev
   namespace: flow
   labels:
-    app: flow-batch-dev
+    app: flow
 spec:
   replicas: 1
   selector:
@@ -46,7 +46,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app: flow-batch-dev
+              app: flow
       volumes:
         - name: log-volume
           emptyDir: {}

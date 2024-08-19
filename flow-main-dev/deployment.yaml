@@ -4,7 +4,7 @@ metadata:
   name: flow-main-dev
   namespace: flow
   labels:
-    app: flow-main-dev
+    app: flow
 spec:
   replicas: 1
   selector:
@@ -96,7 +96,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app: flow-main-dev
+              app: flow
       volumes:
         - name: log-volume
           emptyDir: {}

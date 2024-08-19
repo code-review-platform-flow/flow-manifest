@@ -4,7 +4,7 @@ metadata:
   name: flow-api-gateway-dev
   namespace: flow
   labels:
-    app: flow-api-gateway-dev
+    app: flow
 spec:
   replicas: 1
   selector:
