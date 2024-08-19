@@ -43,7 +43,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              kubernetes.io/metadata.name: flow
+              app: flow-nextjs-dev
       volumes:
         - name: log-volume
           emptyDir: {}
