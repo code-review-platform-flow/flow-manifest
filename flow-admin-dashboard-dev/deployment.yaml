@@ -48,7 +48,6 @@ spec:
             matchLabels:
               app: flow-admin-dashboard-dev
               service: flow
-              team: devops
       volumes:
         - name: log-volume
           emptyDir: {}

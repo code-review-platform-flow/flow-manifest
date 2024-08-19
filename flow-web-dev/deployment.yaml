@@ -46,9 +46,8 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app: flow-web-dev
+              app: flow-nextjs-dev
               service: flow
-              team: devops
       volumes:
         - name: log-volume
           emptyDir: {}

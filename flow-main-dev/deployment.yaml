@@ -101,7 +101,6 @@ spec:
             matchLabels:
               app: flow-main-dev
               service: flow
-              team: devops
       volumes:
         - name: log-volume
           emptyDir: {}
