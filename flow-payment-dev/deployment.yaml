@@ -69,6 +69,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
+              app: flow-payment-dev
               service: flow
       volumes:
         - name: log-volume
