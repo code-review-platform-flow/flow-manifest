@@ -11,7 +11,6 @@ spec:
   selector:
     matchLabels:
       app: flow-payment-dev
-      team: devops
   template:
     metadata:
       labels:
