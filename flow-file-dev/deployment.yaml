@@ -73,11 +73,11 @@ spec:
                       - devops
       topologySpreadConstraints:
         - maxSkew: 1
-          topologyKey: team
+          topologyKey: topology.kubernetes.io/zone
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              team: devops
+              app: flow-file-dev
       volumes:
         - name: log-volume
           emptyDir: {}
