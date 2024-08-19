@@ -51,6 +51,7 @@ spec:
             matchLabels:
               app: flow-batch-dev
               service: flow
+              team: devops
       volumes:
         - name: log-volume
           emptyDir: {}

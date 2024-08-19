@@ -71,6 +71,7 @@ spec:
             matchLabels:
               app: flow-payment-dev
               service: flow
+              team: devops
       volumes:
         - name: log-volume
           emptyDir: {}
