@@ -67,14 +67,6 @@ spec:
                   values:
                     - flow-admin-main-dev
             topologyKey: "kubernetes.io/hostname"
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app: flow-admin-main-dev
-              service: flow
       volumes:
         - name: log-volume
           emptyDir: {}
