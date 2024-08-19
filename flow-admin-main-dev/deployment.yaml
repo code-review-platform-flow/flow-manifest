@@ -4,16 +4,16 @@ metadata:
   name: flow-admin-main-dev
   namespace: flow
   labels:
-    app: flow
+    app: flow-admin-main-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flow
+      app: flow-admin-main-dev
   template:
     metadata:
       labels:
-        app: flow
+        app: flow-admin-main-dev
     spec:
       containers:
         - name: flow-admin-main-dev
@@ -61,7 +61,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app: flow
+              kubernetes.io/metadata.name: flow
       volumes:
         - name: log-volume
           emptyDir: {}
@@ -74,7 +74,7 @@ metadata:
   namespace: flow
 spec:
   selector:
-    app: flow
+    app: flow-admin-main-dev
   ports:
     - protocol: TCP
       port: 80
