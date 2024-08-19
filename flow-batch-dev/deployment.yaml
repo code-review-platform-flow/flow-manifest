@@ -4,16 +4,16 @@ metadata:
   name: flow-batch-dev
   namespace: flow
   labels:
-    app: flow
+    app: flow-batch-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flow
+      app: flow-batch-dev
   template:
     metadata:
       labels:
-        app: flow
+        app: flow-batch-dev
     spec:
       containers:
         - name: flow-batch-dev
@@ -46,7 +46,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app: flow
+              kubernetes.io/metadata.name: flow
       volumes:
         - name: log-volume
           emptyDir: {}

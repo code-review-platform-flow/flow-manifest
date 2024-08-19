@@ -4,16 +4,16 @@ metadata:
   name: flow-payment-dev
   namespace: flow
   labels:
-    app: flow
+    app: flow-payment-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flow
+      app: flow-payment-dev
   template:
     metadata:
       labels:
-        app: flow
+        app: flow-payment-dev
     spec:
       containers:
         - name: flow-payment-dev
@@ -66,7 +66,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app: flow
+              kubernetes.io/metadata.name: flow
       volumes:
         - name: log-volume
           emptyDir: {}
