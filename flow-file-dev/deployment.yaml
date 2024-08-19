@@ -5,17 +5,18 @@ metadata:
   namespace: flow
   labels:
     app: flow
-    team: devops
+    service: flow
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: flow-file-dev
+      service: flow
   template:
     metadata:
       labels:
         app: flow-file-dev
-        team: devops
+        service: flow
     spec:
       containers:
         - name: flow-file-dev
