@@ -43,15 +43,6 @@ spec:
                     operator: In
                     values:
                       - devops
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                    - flow-batch-dev
-            topologyKey: "kubernetes.io/hostname"
       volumes:
         - name: log-volume
           emptyDir: {}
