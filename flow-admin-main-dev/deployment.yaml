@@ -58,6 +58,15 @@ spec:
                     operator: In
                     values:
                       - devops
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - flow-admin-main-dev
+            topologyKey: "kubernetes.io/hostname"
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
