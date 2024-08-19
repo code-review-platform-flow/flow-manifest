@@ -5,6 +5,7 @@ metadata:
   namespace: flow
   labels:
     app: flow
+    team: devops
 spec:
   replicas: 1
   selector:
