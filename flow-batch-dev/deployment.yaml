@@ -4,16 +4,16 @@ metadata:
   name: flow-batch-dev
   namespace: flow
   labels:
-    app: flow-batch-dev
+    app: flow
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flow-batch-dev
+      app: flow
   template:
     metadata:
       labels:
-        app: flow-batch-dev
+        app: flow
     spec:
       containers:
         - name: flow-batch-dev

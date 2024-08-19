@@ -4,16 +4,16 @@ metadata:
   name: flow-admin-main-dev
   namespace: flow
   labels:
-    app: flow-admin-main-dev
+    app: flow
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flow-admin-main-dev
+      app: flow
   template:
     metadata:
       labels:
-        app: flow-admin-main-dev
+        app: flow
     spec:
       containers:
         - name: flow-admin-main-dev
@@ -74,7 +74,7 @@ metadata:
   namespace: flow
 spec:
   selector:
-    app: flow-admin-main-dev
+    app: flow
   ports:
     - protocol: TCP
       port: 80
