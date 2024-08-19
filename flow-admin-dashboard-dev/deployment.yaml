@@ -11,10 +11,12 @@ spec:
   selector:
     matchLabels:
       app: flow-admin-dashboard-dev
+      team: devops
   template:
     metadata:
       labels:
         app: flow-admin-dashboard-dev
+        team: devops
     spec:
       containers:
         - name: flow-admin-dashboard-dev
