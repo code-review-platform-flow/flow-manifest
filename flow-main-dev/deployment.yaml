@@ -99,7 +99,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app: flow-main-dev
+              service: flow
       volumes:
         - name: log-volume
           emptyDir: {}
