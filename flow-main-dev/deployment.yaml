@@ -92,7 +92,7 @@ spec:
                       - devops
       topologySpreadConstraints:
         - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
+          topologyKey: team
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
