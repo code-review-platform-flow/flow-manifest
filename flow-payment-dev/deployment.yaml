@@ -11,10 +11,12 @@ spec:
   selector:
     matchLabels:
       app: flow-payment-dev
+      team: devops
   template:
     metadata:
       labels:
         app: flow-payment-dev
+        team: devops
     spec:
       containers:
         - name: flow-payment-dev
