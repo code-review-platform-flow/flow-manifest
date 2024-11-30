@@ -16,6 +16,8 @@ spec:
       values: |
         loki:
           enabled: true
+          image:
+            tag: "2.9.3"
           persistence:
             enabled: true
             storageClassName: standard
