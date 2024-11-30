@@ -16,8 +16,6 @@ spec:
       values: |
         loki:
           enabled: true
-          image:
-            tag: "latest"
           persistence:
             enabled: true
             storageClassName: standard
@@ -37,8 +35,6 @@ spec:
 
         promtail:
           enabled: true
-          image:
-            tag: "latest"
           config:
             clients:
               - url: http://loki-stack-charts:3100/loki/api/v1/push
