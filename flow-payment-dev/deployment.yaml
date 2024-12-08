@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: flow-payment-dev
-          image: asia-northeast3-docker.pkg.dev/gcuflow/flow-dev/flow-payment-dev:27fa347c9ecbe5807bbd55ecd00efaf634077a7f
+          image: asia-northeast3-docker.pkg.dev/gcuflow/flow-dev/flow-payment-dev:7def288caa2a344a5ca9c8afa54498648917bbaf
           ports:
             - containerPort: 8080
           env:
