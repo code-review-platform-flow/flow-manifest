@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: flow-admin-dashboard-dev
-          image: asia-northeast3-docker.pkg.dev/gcuflow/flow-dev/flow-admin-dashboard-dev:fac598999cbaaee9ea037c076ce5102d4ebd2e4a
+          image: asia-northeast3-docker.pkg.dev/gcuflow/flow-dev/flow-admin-dashboard-dev:d58ce201575b23e8d515fc2586c1406471b45d69
           ports:
             - containerPort: 3000
           env:
