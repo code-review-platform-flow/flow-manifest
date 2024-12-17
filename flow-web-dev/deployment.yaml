@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: flow-nextjs-dev
-          image: asia-northeast3-docker.pkg.dev/gcuflow/flow-dev/flow-nextjs-dev:3b98a6464c86874ddf2c366ddb7efedde2a721e9
+          image: asia-northeast3-docker.pkg.dev/gcuflow/flow-dev/flow-nextjs-dev:6135dc06fe870ff04d79451c1a451114ea4b0e22
           ports:
             - containerPort: 3000
           env:
