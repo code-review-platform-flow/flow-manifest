@@ -24,3 +24,6 @@ Grafana와 같은 애플리케이션을 Helm with ArgoCD 방식을 사용하여 
 ├── flow-web-dev             # 웹 클라이언트 애플리케이션 (Dev 환경)
 └── nginx/                   # Nginx Ingress 설정 - 사용 X
 ```
+
+## ArgoCD 적용 사진
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/eeef0b9d-b34e-4d02-8300-91b7be424c06" />
