@@ -7,6 +7,8 @@ ArgoCD를 활용하여 Kubernetes 환경에서<br>
 각 폴더는 개발 Application을 나타나며, <br>
 Grafana와 같은 애플리케이션을 Helm with ArgoCD 방식을 사용하여 <br> 
 ✨ 선언적이며 버전 관리 ✨가 가능하도록 하였습니다.
+<br>
+<br>
 
 ## 프로젝트 구조
 ```
@@ -24,6 +26,8 @@ Grafana와 같은 애플리케이션을 Helm with ArgoCD 방식을 사용하여 
 ├── flow-web-dev             # 웹 클라이언트 애플리케이션 (Dev 환경)
 └── nginx/                   # Nginx Ingress 설정 - 사용 X
 ```
+<br>
+<br>
 
 ## ArgoCD 적용 사진
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/eeef0b9d-b34e-4d02-8300-91b7be424c06" />
