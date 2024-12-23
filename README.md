@@ -27,3 +27,4 @@ Grafana와 같은 애플리케이션을 Helm with ArgoCD 방식을 사용하여 
 
 ## ArgoCD 적용 사진
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/eeef0b9d-b34e-4d02-8300-91b7be424c06" />
+<img width="400" alt="스크린샷 2024-12-24 오전 3 33 51" src="https://github.com/user-attachments/assets/c0775c0e-8b3b-4390-a781-6479e17fc10a" />
