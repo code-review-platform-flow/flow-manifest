@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: flow-main-dev
-          image: asia-northeast3-docker.pkg.dev/gcuflow/flow-dev/flow-main-dev:00b5839cc3c06611e21039738c9028d691e54f95
+          image: asia-northeast3-docker.pkg.dev/gcuflow/flow-dev/flow-main-dev:c7a8f4202c97bb1f9c1bf53058530f71962fb830
           ports:
             - containerPort: 8080
           env:
